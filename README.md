@@ -18,59 +18,59 @@ The duration argument sets the animation duration. If not given, the animation d
 
 ## Example
 
-  ScrollController _controller;
+    ScrollController _controller;
 
- @override
-  void initState() {
-    _controller = ScrollController();
-    super.initState();
-  }
+    @override
+    void initState() {
+        _controller = ScrollController();
+        super.initState();
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Expandable FAB"),
-      ),
-      floatingActionButton: MyFloatingButton(
-        controller: _controller,
-        animationDuration: Duration(milliseconds: 200),
-        children: [
-          AnimatedCustomIcon(
-              iconData: Icons.settings,
-              onPress: () {
-                log("Button pressed");
-              }),
-          AnimatedCustomIcon(
-              iconData: Icons.accessibility,
-              onPress: () {
-                log("Button pressed");
-              }),
-          AnimatedCustomIcon(
-              iconData: Icons.account_tree,
-              onPress: () {
-                log("Button pressed");
-              }),
-          AnimatedCustomIcon(
-              iconData: Icons.camera,
-              onPress: () {
-                log("Button pressed");
-              }),
-        ],
-      ),
-      body: Container(
-          width: double.infinity,
-          child: ListView.builder(
-              controller: _controller,
-              itemBuilder: (context, index) => Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.grey),
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                  ))),
-    );
-  }
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(
+                title: Text("Expandable FAB"),
+            ),
+            floatingActionButton: MyFloatingButton(
+                controller: _controller,
+                animationDuration: Duration(milliseconds: 200),
+                children: [
+                    AnimatedCustomIcon(
+                        iconData: Icons.settings,
+                        onPress: () {
+                            log("Button pressed");
+                        }),
+                    AnimatedCustomIcon(
+                        iconData: Icons.accessibility,
+                        onPress: () {
+                            log("Button pressed");
+                        }),
+                    AnimatedCustomIcon(
+                        iconData: Icons.account_tree,
+                        onPress: () {
+                            log("Button pressed");
+                        }),
+                    AnimatedCustomIcon(
+                        iconData: Icons.camera,
+                        onPress: () {
+                            log("Button pressed");
+                        }),
+                ],
+            ),
+            body: Container(
+                width: double.infinity,
+                child: ListView.builder(
+                    controller: _controller,
+                    itemBuilder: (context, index) => Container(
+                        height: 200,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey),
+                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                ))),
+        );
+    }
 
 
 <p>
