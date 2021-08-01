@@ -6,25 +6,25 @@ import 'package:flutter/rendering.dart';
 
 class GradientFab extends StatefulWidget {
   // Gradient Fab decoration. The decoration can have customized gradient and border Radius.
-  final Decoration decoration;
+  final Decoration? decoration;
 
-  final Duration animationDuration;
+  final Duration? animationDuration;
 
-  final AnimatedIconData animatedIconData;
+  final AnimatedIconData? animatedIconData;
 
-  final Color animatedIconColor;
+  final Color? animatedIconColor;
 
-  final VoidCallback onOpen;
+  final VoidCallback? onOpen;
 
-  final VoidCallback onClose;
+  final VoidCallback? onClose;
 
-  final List<FabChild> children;
+  final List<FabChild>? children;
 
   // if ScrollController is not null, the GradientFab will go hide on scroll
-  final ScrollController controller;
+  final ScrollController? controller;
 
   const GradientFab(
-      {Key key,
+      {Key? key,
       this.decoration,
       this.animationDuration,
       this.animatedIconData,
@@ -41,11 +41,11 @@ class GradientFab extends StatefulWidget {
 
 class _GradientFabState extends State<GradientFab>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> animation;
-  bool _isOpen;
-  bool _isVis;
-  bool _isClosingProgress;
+  late AnimationController _controller;
+  late Animation<double> animation;
+  late bool _isOpen;
+  late bool _isVis;
+  late bool _isClosingProgress;
 
   @override
   void didUpdateWidget(GradientFab oldWidget) {
@@ -63,17 +63,17 @@ class _GradientFabState extends State<GradientFab>
     _isVis = true;
     _isClosingProgress = false;
     if (widget.controller != null)
-      widget.controller.addListener(() {
-        if (widget.controller.hasClients &&
-            widget.controller.position.userScrollDirection ==
+      widget.controller!.addListener(() {
+        if (widget.controller!.hasClients &&
+            widget.controller!.position.userScrollDirection ==
                 ScrollDirection.forward) {
           if (!_isVis) {
             setState(() {
               _isVis = true;
             });
           }
-        } else if (widget.controller.hasClients &&
-            widget.controller.position.userScrollDirection ==
+        } else if (widget.controller!.hasClients &&
+            widget.controller!.position.userScrollDirection ==
                 ScrollDirection.reverse) {
           if (_isVis && !_isClosingProgress) {
             if (_isOpen) {
@@ -109,10 +109,10 @@ class _GradientFabState extends State<GradientFab>
   _toggleButton() {
     if (!_isOpen) {
       _controller.forward(from: 0);
-      if (widget.onOpen != null) widget.onOpen();
+      if (widget.onOpen != null) widget.onOpen!();
     } else {
       _controller.reverse();
-      if (widget.onClose != null) widget.onClose();
+      if (widget.onClose != null) widget.onClose!();
     }
     setState(() {
       _isOpen = !_isOpen;
@@ -120,7 +120,7 @@ class _GradientFabState extends State<GradientFab>
   }
 
   List<Widget> renderButton() {
-    List<FabChild> temp = widget.children ?? List();
+    List<FabChild> temp = widget.children ?? [];
     List<Widget> toReturn = temp
         .map(
           (child) => Container(
@@ -167,7 +167,7 @@ class _GradientFabState extends State<GradientFab>
                 return Container(
                     height: ((widget.children == null
                                 ? 0
-                                : widget.children.length) *
+                                : widget.children!.length) *
                             50 *
                             animation.value) +
                         50.0,
@@ -179,8 +179,8 @@ class _GradientFabState extends State<GradientFab>
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  Colors.indigo[300],
-                                  Colors.indigo[900],
+                                  Colors.indigo[300]!,
+                                  Colors.indigo[900]!,
                                 ]),
                             borderRadius: BorderRadius.circular(50)),
                     child: Column(
@@ -201,7 +201,7 @@ class FabChild {
   VoidCallback onPress;
   FabChild({
     this.iconColor = Colors.white,
-    @required this.iconData,
-    @required this.onPress,
+    required this.iconData,
+    required this.onPress,
   });
 }
